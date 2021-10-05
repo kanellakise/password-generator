@@ -1,1 +1,2 @@
-# Password Generator Starter Code
+# Password Generator
+## Weekly Project #3
