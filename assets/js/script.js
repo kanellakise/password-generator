@@ -5,76 +5,95 @@ var lettersCap = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M
 var lettersLow = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "?", "-"];
-var passTotal = []
+var passTotal = [];
+var lengthQuestion;
 
-// "answer the following prompts to generate a custom password" 
+// "answer the following prompts to generate a custom password" prompt
 function notify() {
-  alert("Please answer the following prompts to generate a custom password!")
-  passCapAsk()
+  alert("Please answer the following prompts to generate a custom password!");
+  passCapAsk();
 }
-passCapAsk()
+passCapAsk();
 
-// "Include capital letters?"
-// Function for this choice
+// "Include capital letters?" function
 function passCapAsk() {
-  var confirmCap = confirm("Include capital letters?")
+  var confirmCap = confirm("Include capital letters?");
   if(confirmCap === true) {
-    passTotal = passTotal.concat(lettersCap)
-    passLowAsk()
+    passTotal = passTotal.concat(lettersCap);
+    debugger;
+    passLowAsk();
   } else {
-    passLowAsk()
+    passLowAsk();
   }
 }
 
-// "Include lower case letters?"
-// Function for this choice
+// "Include lower case letters?" function
 function passLowAsk() {
-  var confirmLow = confirm("Include lower case letters?")
+  var confirmLow = confirm("Include lower case letters?");
   if(confirmLow === true) {
-    passTotal = passTotal.concat(lettersLow)
-    passNumAsk()
+    passTotal = passTotal.concat(lettersLow);
+    debugger;
+    passNumAsk();
   } else {
-    passNumAsk()
+    passNumAsk();
   }
 }
 
-// "Include numbers?"
-// Function for this choice
-
+// "Include numbers?" function
 function passNumAsk() {
-  var confirmNum = confirm("Include numbers?")
+  var confirmNum = confirm("Include numbers?");
   if(confirmNum === true) {
-    passTotal = passTotal.concat(numbers)
-    passSymAsk()
+    passTotal = passTotal.concat(numbers);
+    debugger;
+    passSymAsk();
   } else {
-    passSymAsk()
+    passSymAsk();
   }
 }
 
-// "Include symbols?"
-// Function for this choice
+// "Include symbols?" function
 function passSymAsk() {
-  var confirmSym = confirm("Include symbols?")
+  var confirmSym = confirm("Include symbols?");
   if(confirmSym === true) {
-    passTotal = passTotal.concat(symbols)
-    totalCheck()
+    passTotal = passTotal.concat(symbols);
+    debugger;
+    totalCheck();
   } else {
-    totalCheck()
+    totalCheck();
   }
 }
 
 // if passTotal = [], then return to beginning and alert stating that at least one option must be selected.
 function totalCheck() {
   if(passTotal.length <= 0) {
-    alert("You must choose at least one option before continuing! Please retry.")
-    passCapAsk()
+    alert("You must choose at least one option before continuing! Please retry.");
+    passCapAsk();
   } else {
-    writePassword()
+    passLengthAsk();
   }
 }
+
 // "How long should this password be? min 8 char, max 128"
+function passLengthAsk() {
+  var lengthQuestion = prompt("How long should it be? Please type a number between 8 and 128.");
+  if (lengthQuestion >= 8 && lengthQuestion <= 128) {
+    randomizeThisPass(passwordLength);
+  } else {
+    alert("Incorrect input, Please try again!")
+    passLengthAsk();
+  }
+
+}
 
 // Function to randomize letters/numbers/symbols with appropriate arrays
+
+function randomizeThisPass(pass) {
+  var randomPassword = []
+  for (var i = 0; i <= pass; i++) {
+
+  }
+
+}
 
 
 
