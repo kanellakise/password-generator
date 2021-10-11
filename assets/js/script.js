@@ -23,7 +23,7 @@ function notify() {
 // adds capital letters to the random pool if answered "true." If not, continue to lowercase question
 function passCapAsk() {
   var confirmCap = confirm("Include capital letters?");
-  if(confirmCap === true) {
+  if (confirmCap === true) {
     passTotal = passTotal.concat(lettersCap);
     passLowAsk();
   } else {
@@ -34,7 +34,7 @@ function passCapAsk() {
 // adds lowercase letters to the random pool if answered "true." If not, continue to numbers question
 function passLowAsk() {
   var confirmLow = confirm("Include lower case letters?");
-  if(confirmLow === true) {
+  if (confirmLow === true) {
     passTotal = passTotal.concat(lettersLow);
     passNumAsk();
   } else {
@@ -45,7 +45,7 @@ function passLowAsk() {
 // adds numbers to the random pool if answered "true." If not, continue to symbols question
 function passNumAsk() {
   var confirmNum = confirm("Include numbers?");
-  if(confirmNum === true) {
+  if (confirmNum === true) {
     passTotal = passTotal.concat(numbers);
     passSymAsk();
   } else {
@@ -56,7 +56,7 @@ function passNumAsk() {
 // adds symbols to the random pool if answered "true." If not, continue to password length question
 function passSymAsk() {
   var confirmSym = confirm("Include symbols?");
-  if(confirmSym === true) {
+  if (confirmSym === true) {
     passTotal = passTotal.concat(symbols);
     totalCheck();
   } else {
@@ -66,7 +66,7 @@ function passSymAsk() {
 
 // if user has made no selections, then return to beginning and alert stating that at least one option must be selected.
 function totalCheck() {
-  if(passTotal.length <= 0) {
+  if (passTotal.length <= 0) {
     alert("You must choose at least one option before continuing! Please retry.");
     passCapAsk();
   } else {
@@ -85,7 +85,6 @@ function passLengthAsk() {
     alert("Incorrect input, Please try again!");
     passLengthAsk();
   }
-
 }
 
 // Function to randomize user selections into new array
@@ -101,22 +100,16 @@ function randomizeThisPass(pass) {
   for (var i = 0; i < pass; i++) {
     var randomNum = randomArrayNum(0, passTotal.length);
     randomNum = Math.floor(randomNum);
-    console.log(randomNum);
-    
 
     // push random string to new pool
     var randomFromTotal = passTotal[randomNum];
     randomPassword.push(randomFromTotal);
-    console.log(randomPassword);
   }
 
   // remove commas from array output, print randomized password to screen
   randomPassword = randomPassword.join("");
   writePassword(randomPassword);
-
 }
-
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
