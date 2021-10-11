@@ -8,62 +8,63 @@ var symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "?", "-"];
 var passTotal = [];
 var lengthQuestion;
 
-// "answer the following prompts to generate a custom password" prompt
+// Notifies user that new password will be generated, resets array choice pool
 function notify() {
+
+  // resets text box element to empty, resets passTotal array so new passwords do not contain previous selections
+  var passwordText = document.querySelector("#password");
+  passwordText.value = "";
+  passTotal = [];
+
   alert("Please answer the following prompts to generate a custom password!");
   passCapAsk();
 }
-passCapAsk();
 
-// "Include capital letters?" function
+// adds capital letters to the random pool if answered "true." If not, continue to lowercase question
 function passCapAsk() {
   var confirmCap = confirm("Include capital letters?");
   if(confirmCap === true) {
     passTotal = passTotal.concat(lettersCap);
-    debugger;
     passLowAsk();
   } else {
     passLowAsk();
   }
 }
 
-// "Include lower case letters?" function
+// adds lowercase letters to the random pool if answered "true." If not, continue to numbers question
 function passLowAsk() {
   var confirmLow = confirm("Include lower case letters?");
   if(confirmLow === true) {
     passTotal = passTotal.concat(lettersLow);
-    debugger;
     passNumAsk();
   } else {
     passNumAsk();
   }
 }
 
-// "Include numbers?" function
+// adds numbers to the random pool if answered "true." If not, continue to symbols question
 function passNumAsk() {
   var confirmNum = confirm("Include numbers?");
   if(confirmNum === true) {
     passTotal = passTotal.concat(numbers);
-    debugger;
     passSymAsk();
   } else {
     passSymAsk();
   }
 }
 
-// "Include symbols?" function
+// adds symbols to the random pool if answered "true." If not, continue to password length question
 function passSymAsk() {
   var confirmSym = confirm("Include symbols?");
   if(confirmSym === true) {
     passTotal = passTotal.concat(symbols);
-    debugger;
     totalCheck();
   } else {
     totalCheck();
   }
 }
 
-// if passTotal = [], then return to beginning and alert stating that at least one option must be selected.
+// if user has made no selections, then return to beginning and alert stating that at least one option must be selected.
 function totalCheck() {
   if(passTotal.length <= 0) {
     alert("You must choose at least one option before continuing! Please retry.");
@@ -77,24 +78,40 @@ function totalCheck() {
 function passLengthAsk() {
   var lengthQuestion = prompt("How long should it be? Please type a number between 8 and 128.");
   if (lengthQuestion >= 8 && lengthQuestion <= 128) {
-    randomizeThisPass(passwordLength);
+    randomizeThisPass(lengthQuestion);
+
+    // if wrong input is detected, prompt user to retry
   } else {
-    alert("Incorrect input, Please try again!")
+    alert("Incorrect input, Please try again!");
     passLengthAsk();
   }
 
 }
 
-// Function to randomize letters/numbers/symbols with appropriate arrays
-
+// Function to randomize user selections into new array
 function randomizeThisPass(pass) {
   var randomPassword = []
-  for (var i = 0; i <= pass; i++) {
 
+  // generate random number between minimum and user length choice
+  function randomArrayNum(min, max) {
+    return Math.random() * (max - min) + min;
   }
 
-}
+  // select a random string from the user selected pool
+  for (var i = 0; i < pass; i++) {
+    var randomNum = randomArrayNum(8, passTotal.length);
+    randomNum = Math.floor(randomNum);
 
+    // push random string to new pool
+    var randomFromTotal = passTotal[randomNum];
+    randomPassword.push(randomFromTotal);
+  }
+
+  // remove commas from array output, print randomized password to screen
+  randomPassword = randomPassword.join("");
+  writePassword(randomPassword);
+
+}
 
 
 
@@ -102,8 +119,8 @@ function randomizeThisPass(pass) {
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
+function writePassword(finalPassword) {
+  var password = finalPassword;
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -111,4 +128,4 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", notify);
