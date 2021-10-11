@@ -99,12 +99,15 @@ function randomizeThisPass(pass) {
 
   // select a random string from the user selected pool
   for (var i = 0; i < pass; i++) {
-    var randomNum = randomArrayNum(8, passTotal.length);
+    var randomNum = randomArrayNum(0, passTotal.length);
     randomNum = Math.floor(randomNum);
+    console.log(randomNum);
+    
 
     // push random string to new pool
     var randomFromTotal = passTotal[randomNum];
     randomPassword.push(randomFromTotal);
+    console.log(randomPassword);
   }
 
   // remove commas from array output, print randomized password to screen
